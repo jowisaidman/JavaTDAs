@@ -1,7 +1,7 @@
 # Simple Application of Java TDAs 
 
 ## Introduction
-Small java project to see how the followig TDAs work:
+Small java project to see some documentation, exercises and use the following TDAs:
 
 1- Stack<br/>
 2- Queue<br/>
@@ -13,6 +13,7 @@ Small java project to see how the followig TDAs work:
 
 ### Stack
 The following methods are implemeted in this proyect:
+
 1- Push<br/> 
 2- Pop<br/>
 3- Peek<br/>

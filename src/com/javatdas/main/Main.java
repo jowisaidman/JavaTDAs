@@ -1,43 +1,45 @@
 package com.javatdas.main;
-//import com.javatdas.stack.Stack;
+//import com.javatdas.tdas.Stack;
+import com.javatdas.com.javatdas.controllers.Controller;
+import com.javatdas.com.javatdas.controllers.StackController;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        String option = null;
         welcome();
+
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
-        try {
-            option = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        String option = readInput();
+
+        HashMap<String, Controller> controllers = getControllers();
+
         while (option !=null && !(option.equals("6"))) {
-            // BufferReader para leer la entrada
-
-            showMainMenu();
-
-            try {
-                option = reader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
+            Controller controller = controllers.get(option);
+            if (controller != null) {
+                controller.invokeMenuTda();
+            } else {
+                System.out.println("Selecciono una opcion invalida!");
             }
 
-            //Aca llamo al tda correspondiente
-
+            showMainMenu();
+            option = readInput();
         }
+        System.out.println("Muchas gracias por usar este Software");
     }
 
-    public static void welcome() {
+    private static void welcome() {
         System.out.println("Bienvenido a JavaTDAs, con este software podra pobrar distitas estructuras " +
                 "de datos hechas en Java");
         showMainMenu();
     }
 
-    public static void showMainMenu() {
+    private static void showMainMenu() {
         System.out.println(
                 """
                         Por favor seleccione una opcion:
@@ -49,5 +51,25 @@ public class Main {
                         [6] Quit\s
                         Su opcion:\s"""
         );
+    }
+
+    private static HashMap<String, Controller> getControllers() {
+        HashMap<String, Controller> controllers = new HashMap<>();
+        StackController stackController = new StackController();
+        controllers.put("1",stackController);
+        return controllers;
+    }
+
+    public static String readInput() {
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(System.in));
+        String option = null;
+        try {
+            option = reader.readLine();
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+        return option;
     }
 }
