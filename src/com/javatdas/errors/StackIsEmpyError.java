@@ -1,4 +1,4 @@
-package com.javatdas.tdas;
+package com.javatdas.errors;
 
 public class StackIsEmpyError extends Throwable {
     public StackIsEmpyError(String s) {

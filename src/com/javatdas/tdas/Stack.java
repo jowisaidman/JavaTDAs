@@ -1,5 +1,7 @@
 package com.javatdas.tdas;
 
+import com.javatdas.errors.StackIsEmpyError;
+
 import java.util.Arrays;
 
 public class Stack {
@@ -27,7 +29,10 @@ public class Stack {
         return topNum;
     }
 
-    public int peek() {
+    public int peek() throws StackIsEmpyError {
+        if (isEmpty()) {
+            throw new StackIsEmpyError("Error: La pila esta vacia");
+        }
         return array[topIndex];
     }
 

@@ -1,4 +1,4 @@
-package com.javatdas.com.javatdas.controllers;
+package com.javatdas.controllers;
 
 public interface Controller {
     //Con esta clase solo llamo a controller de main menu y solo tengo

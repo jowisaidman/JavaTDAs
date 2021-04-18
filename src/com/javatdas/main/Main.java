@@ -1,7 +1,7 @@
 package com.javatdas.main;
 //import com.javatdas.tdas.Stack;
-import com.javatdas.com.javatdas.controllers.Controller;
-import com.javatdas.com.javatdas.controllers.StackController;
+import com.javatdas.controllers.Controller;
+import com.javatdas.controllers.StackController;
 
 import java.io.BufferedReader;
 import java.io.IOException;

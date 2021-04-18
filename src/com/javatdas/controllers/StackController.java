@@ -1,7 +1,8 @@
-package com.javatdas.com.javatdas.controllers;
+package com.javatdas.controllers;
 
 import com.javatdas.tdas.Stack;
-import com.javatdas.tdas.StackIsEmpyError;
+import com.javatdas.errors.StackIsEmpyError;
+import com.javatdas.tests.StackTests;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class StackController implements Controller {
         showMenu();
         String option = readInput();
 
-        while (option !=null && !(option.equals("4"))) {
+        while (option !=null && !(option.equals("5"))) {
             callAction(option);
 
             showMenu();
@@ -28,6 +29,13 @@ public class StackController implements Controller {
     public void callAction(String option) {
         if (option.equals("1")) {
             operationWithStack();
+        }
+        else if (option.equals("2")) {
+            showPrimitiveDocumetation();
+        } else if (option.equals("3")) {
+            showExcercises();
+        } else if (option.equals("4")) {
+            callTestRunner();
         } else {
             System.out.println("Selecciono una opcion invalida!");
         }
@@ -38,15 +46,17 @@ public class StackController implements Controller {
         System.out.println(
                 """
                         Seleccione una de las siguientes opciones:
-                        [1] Crear Stack y operar.
+                        [1] Crear pila y operar.
                         [2] Ver complidad y documentacion de las primitivas.
                         [3] Abrir menu de ejercicios.
-                        [4] Volver a menu principal.
+                        [4] Correr pruebas con tiempos de la pila.
+                        [5] Volver a menu principal.
                         """
         );
     }
 
     private void operationWithStack() {
+        //Posible refactor capa intermedia para esto.
         Stack stack = new Stack(100);
         showStackOperationMenu();
         String option = readInput();
@@ -61,11 +71,13 @@ public class StackController implements Controller {
                 case "2" -> {
                     try {
                         System.out.println("Se desapilo un: " + stack.pop());
-                    } catch (StackIsEmpyError e) {
-
-                    }
+                    } catch (StackIsEmpyError e) {} //Pensar si deberia hacer algo aca
                 }
-                case "3" -> System.out.println("El tope de la pila es: " + stack.peek());
+                case "3" -> {
+                    try {
+                        System.out.println("El tope de la pila es: " + stack.peek());;
+                    } catch (StackIsEmpyError e) {} //Pensar si deberia hacer algo aca
+                }
                 case "4" -> System.out.println("La pila esta vacia: " + stack.isEmpty());
                 case "5" -> stack.show();
             }
@@ -101,5 +113,40 @@ public class StackController implements Controller {
             e.printStackTrace();
         }
         return option;
+    }
+
+    public void showPrimitiveDocumetation() {
+        System.out.println(
+                """
+                       [1] put: 
+                       Metodo: Toma como parametro un nuevo elemento y lo agrega al tope de la pila, no devuelve nada.
+                       Complejidad: O(1)
+                       
+                       [2] pop:
+                       Metodo: Remueve el tope de la pila y lo devuelve.
+                       Complejidad: O(1)
+                       
+                       [3] peek:
+                       Metodo: Devuelve el tope de la pila, no modifica la misma.
+                       Complejidad: O(1)
+                       
+                       [4] isEmpty
+                       Metodo: Devuelve un booleano indicando si la pila esta o no vacia, no modifica la misma.
+                       Complejidad: O(1)
+                       
+                       [5] SeeStack
+                       Metodo: Imprime toda la pila en pantalla, no es una primitiva del tda pila original.
+                       Complejidad: O(n)
+                """
+        );
+    }
+
+    public void showExcercises() {
+        System.out.println("Seccion de ejercicios en construccion");
+    }
+
+    public void callTestRunner() {
+        StackTests tests = new StackTests(); //La idea es que aca uno pueda ver los tiempos del stack
+        tests.runTests();
     }
 }
