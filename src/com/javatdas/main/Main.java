@@ -1,6 +1,7 @@
 package com.javatdas.main;
 //import com.javatdas.tdas.Stack;
 import com.javatdas.controllers.Controller;
+import com.javatdas.controllers.QueueController;
 import com.javatdas.controllers.StackController;
 
 import java.io.BufferedReader;
@@ -11,9 +12,6 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
         welcome();
-
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(System.in));
 
         String option = readInput();
 
@@ -53,10 +51,12 @@ public class Main {
         );
     }
 
-    private static HashMap<String, Controller> getControllers() {
+    private static HashMap<String, Controller> getControllers() {//Ejemplo de como evitar ifs.
         HashMap<String, Controller> controllers = new HashMap<>();
         StackController stackController = new StackController();
         controllers.put("1",stackController);
+        QueueController queueController = new QueueController();
+        controllers.put("2",queueController);
         return controllers;
     }
 
